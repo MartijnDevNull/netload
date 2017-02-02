@@ -4,6 +4,8 @@ import netload.model.Day;
 import org.hibernate.*;
 import org.hibernate.cfg.Configuration;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
@@ -59,5 +61,26 @@ public class Stats {
             return id;
         }
         throw new Exception("Day already added");
+    }
+
+    public List<Day> getAllDays() {
+        Session session = factory.openSession();
+        List<Day> days = new ArrayList<>();
+        Transaction tx = null;
+        try{
+            tx = session.beginTransaction();
+            List daysList = session.createQuery("FROM Day").list();
+            for (Iterator iterator =
+                 daysList.iterator(); iterator.hasNext();){
+                days.add((Day) iterator.next());
+            }
+            tx.commit();
+        }catch (HibernateException e) {
+            if (tx!=null) tx.rollback();
+            e.printStackTrace();
+        }finally {
+            session.close();
+        }
+        return days;
     }
 }

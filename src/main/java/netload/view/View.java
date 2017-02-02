@@ -15,27 +15,34 @@ package netload.view;
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-import java.util.ArrayList;
-
-import netload.Database.Stats;
 import netload.controller.Scrape;
+import netload.controller.StatsController;
 import netload.controller.Update;
 import netload.model.Day;
+import netload.model.Total;
 import netload.model.Week;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class View {
     private Scrape scraper;
     private Update update;
+    private StatsController controller;
 
     public View() {
         scraper = new Scrape();
         update = new Update();
+        controller = new StatsController();
     }
 
-    @RequestMapping("/days/all")
+    @RequestMapping("/scrape/days")
+    @CrossOrigin(origins = "*")
     public ArrayList<Day> getAllDays() {
         try {
             return scraper.getAllDays();
@@ -44,7 +51,8 @@ public class View {
         }
     }
 
-    @RequestMapping("/week/list")
+    @CrossOrigin(origins = "*")
+    @RequestMapping("/scrape/week/list")
     public ArrayList<Day> getWeekList() {
         try {
             return scraper.getWeekList();
@@ -53,7 +61,8 @@ public class View {
         }
     }
 
-    @RequestMapping("/week")
+    @CrossOrigin(origins = "*")
+    @RequestMapping("/scrape/week")
     public Week getWeek() {
         try {
             return scraper.getWeek();
@@ -62,6 +71,7 @@ public class View {
         }
     }
 
+    @CrossOrigin(origins = "*")
     @RequestMapping("/update")
     public boolean update() {
         try {
@@ -69,6 +79,28 @@ public class View {
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return false;
+        }
+    }
+
+    @CrossOrigin(origins = "*")
+    @RequestMapping("/stats/days")
+    public List<Day> getAllDaysStat() {
+        try {
+            return controller.getAllDays();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+
+    @CrossOrigin(origins = "*")
+    @RequestMapping("/stats/total")
+    public Total getAllDaysStatTotal() {
+        try {
+            return controller.getTotalStats();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return null;
         }
     }
 }

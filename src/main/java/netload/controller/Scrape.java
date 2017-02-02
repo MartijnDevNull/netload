@@ -8,6 +8,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
@@ -60,7 +61,7 @@ public class Scrape {
     }
 
     public ArrayList<Day> getWeekList() throws IOException, ParseException {
-        ArrayList<Day> allDays = getAllDays();
+        List<Day> allDays = getAllDays();
         ArrayList<Day> week = new ArrayList<>();
 
         for (Day day: allDays
@@ -81,11 +82,11 @@ public class Scrape {
         double total=0, up=0, down=0;
         for (Day day: days
              ) {
-            total=+day.getTotal();
-            up=+day.getUp();
-            down=+day.getDown();
+            total+=day.getTotal();
+            up+=day.getUp();
+            down+=day.getDown();
         }
-        return new Week(0, new DateTime(days.get(0)).getWeekOfWeekyear(), total, up, down);
+        return new Week(0, new DateTime(days.get(0).getDatum()).getWeekOfWeekyear(), Math.ceil(total), Math.ceil(up), Math.ceil(down));
     }
 
     public Iterator<Element> getElements() throws IOException {
