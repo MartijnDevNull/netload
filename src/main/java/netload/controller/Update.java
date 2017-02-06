@@ -1,6 +1,7 @@
 package netload.controller;
 
 import netload.database.Stats;
+import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -24,10 +25,12 @@ import java.text.ParseException;
 public class Update {
     private Stats stats;
     private Scrape scrape;
+    static Logger log;
 
     public Update() {
         stats = new Stats();
         scrape = new Scrape();
+        log = Logger.getLogger(Update.class.getName());
     }
 
     public boolean update() throws IOException, ParseException {
@@ -35,7 +38,7 @@ public class Update {
             try {
                 stats.addDay(day);
             } catch (Exception e) {
-                System.out.println(e.getMessage());
+                log.info(e.getMessage());
             }
         });
         return true;

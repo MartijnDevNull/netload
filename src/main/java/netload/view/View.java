@@ -21,6 +21,7 @@ import netload.controller.Update;
 import netload.model.Day;
 import netload.model.Total;
 import netload.model.Week;
+import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,11 +35,13 @@ public class View {
     private Scrape scraper;
     private Update update;
     private StatsController controller;
+    static Logger log;
 
     public View() {
         scraper = new Scrape();
         update = new Update();
         controller = new StatsController();
+        log = Logger.getLogger(View.class.getName());
     }
 
     @RequestMapping("/scrape/days")
@@ -77,7 +80,7 @@ public class View {
         try {
             return update.update();
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            log.error(e.getMessage());
             return false;
         }
     }
@@ -88,7 +91,7 @@ public class View {
         try {
             return controller.getAllDays();
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            log.error(e.getMessage());
             return null;
         }
     }
@@ -99,7 +102,7 @@ public class View {
         try {
             return controller.getTotalStats();
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            log.error(e.getMessage());
             return null;
         }
     }
@@ -110,7 +113,7 @@ public class View {
         try {
             return controller.getTotalWeeks();
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            log.error(e.getMessage());
             return null;
         }
     }
