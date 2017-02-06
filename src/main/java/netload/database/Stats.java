@@ -1,4 +1,4 @@
-package netload.Database;
+package netload.database;
 
 import netload.model.Day;
 import org.hibernate.*;
@@ -7,7 +7,6 @@ import org.hibernate.cfg.Configuration;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Copyright (C) 01/02/17 martijn

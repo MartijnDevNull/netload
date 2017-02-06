@@ -1,6 +1,6 @@
 package netload.controller;
 
-import netload.Database.Stats;
+import netload.database.Stats;
 
 import java.io.IOException;
 import java.text.ParseException;

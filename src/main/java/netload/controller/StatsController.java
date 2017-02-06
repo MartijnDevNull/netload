@@ -1,14 +1,11 @@
 package netload.controller;
 
-import netload.Database.Stats;
+import netload.database.Stats;
 import netload.model.Day;
 import netload.model.Total;
-import netload.model.Week;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 /**
  * Copyright (C) 02/02/17 martijn
