@@ -103,4 +103,16 @@ public class View {
             return null;
         }
     }
+
+    @CrossOrigin(origins = "*")
+    @RequestMapping("/stats/weeks")
+    public ArrayList<Week> getWeeksTotal() {
+        try {
+            return controller.getTotalWeeks();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+
 }

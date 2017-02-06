@@ -16,9 +16,9 @@ package netload.model;
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-public class Week {
+public class Week implements Comparable<Week>{
     public int id;
-    public int weekNumber;
+    public Integer weekNumber;
     public double total;
     public double up;
     public double down;
@@ -38,7 +38,7 @@ public class Week {
         return id;
     }
 
-    public int getWeekNumber() {
+    public Integer getWeekNumber() {
         return weekNumber;
     }
 
@@ -72,5 +72,10 @@ public class Week {
 
     public void setDown(double down) {
         this.down = down;
+    }
+
+    @Override
+    public int compareTo(Week week) {
+        return getWeekNumber().compareTo(week.getWeekNumber());
     }
 }

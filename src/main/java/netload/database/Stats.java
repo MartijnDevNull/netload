@@ -1,6 +1,7 @@
 package netload.database;
 
 import netload.model.Day;
+import netload.model.Week;
 import org.hibernate.*;
 import org.hibernate.cfg.Configuration;
 
@@ -62,13 +63,14 @@ public class Stats {
         throw new Exception("Day already added");
     }
 
-    public List<Day> getAllDays() {
+    public List<Day> getDays(int amount) {
         Session session = factory.openSession();
         List<Day> days = new ArrayList<>();
         Transaction tx = null;
         try{
+            amount = (amount == 0) ? 12 : amount;
             tx = session.beginTransaction();
-            List daysList = session.createQuery("FROM Day").list();
+            List daysList = session.createQuery("FROM Day").setMaxResults(amount).list();
             for (Iterator iterator =
                  daysList.iterator(); iterator.hasNext();){
                 days.add((Day) iterator.next());

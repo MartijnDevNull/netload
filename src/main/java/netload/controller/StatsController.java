@@ -2,7 +2,11 @@ package netload.controller;
 
 import netload.database.Stats;
 import netload.model.Day;
+import netload.model.Month;
 import netload.model.Total;
+import netload.model.Week;
+import org.joda.time.DateTime;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -33,7 +37,7 @@ public class StatsController {
     }
 
     public ArrayList<Day> getAllDays() {
-        ArrayList<Day> days = (ArrayList<Day>) stats.getAllDays();
+        ArrayList<Day> days = (ArrayList<Day>) stats.getDays(0);
         Collections.sort(days);
 
         if (days.isEmpty()) {
@@ -43,15 +47,65 @@ public class StatsController {
         }
     }
 
-    public Total getTotalStats(){
+    public ArrayList<Day> getDays(int amount) {
+        ArrayList<Day> days = (ArrayList<Day>) stats.getDays(amount);
+        Collections.sort(days);
+
+        if (days.isEmpty()) {
+            throw new NullPointerException("List is empty");
+        } else {
+            return days;
+        }
+    }
+
+    public Total getTotalStats() {
         ArrayList<Day> allDays = getAllDays();
-        double total=0, up=0, down=0;
-        for (Day day: allDays
-             ) {
-            total+=day.getTotal();
-            up+=day.getUp();
-            down+=day.getDown();
+        double total = 0, up = 0, down = 0;
+        for (Day day : allDays
+                ) {
+            total += day.getTotal();
+            up += day.getUp();
+            down += day.getDown();
         }
         return new Total(Math.ceil(total), Math.ceil(up), Math.ceil(down));
+    }
+
+    public ArrayList<Week> getTotalWeeks() {
+        ArrayList<Day> days = (ArrayList<Day>) stats.getDays(49);
+        Collections.sort(days);
+
+        ArrayList<Week> weeks = new ArrayList<>();
+        int weekNumber = new DateTime(days.get(0).getDatum()).getWeekOfWeekyear();
+        double total = 0, up = 0, down = 0;
+
+        for (Day day : days
+                ) {
+            DateTime dayTime = new DateTime(day.getDatum());
+            if (dayTime.getWeekOfWeekyear() == weekNumber) {
+                total += day.getTotal();
+                up += day.getUp();
+                down += day.getDown();
+            } else {
+                weeks.add(new Week(0, weekNumber, Math.ceil(total), Math.ceil(up), Math.ceil(down)));
+                total = 0;
+                up = 0;
+                down = 0;
+                weekNumber++;
+            }
+        }
+
+        if (weeks.isEmpty()) {
+            throw new NullPointerException("List is empty");
+        } else {
+            return weeks;
+        }
+    }
+
+    public ArrayList<Month> getTotalMonths() {
+        ArrayList<Day> days = (ArrayList<Day>) stats.getDays(0);
+        Collections.sort(days);
+
+        //TODO: give total months
+        throw new NotImplementedException();
     }
 }
