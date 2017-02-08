@@ -2,7 +2,7 @@ var randomScalingFactor = function () {
     return Math.round(Math.random() * 1000)
 };
 
-var url = "http://localhost:8080";
+var url = "https://api.load.plebian.nl";
 
 $.ajax({
     url: url + "/stats/total", success: function (result) {

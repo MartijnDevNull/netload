@@ -64,23 +64,20 @@ public class Stats {
     }
 
     public List<Day> getDays(int amount) {
-        Session session = factory.openSession();
         List<Day> days = new ArrayList<>();
         Transaction tx = null;
-        try{
+        try (Session session = factory.openSession()) {
             amount = (amount == 0) ? 12 : amount;
             tx = session.beginTransaction();
             List daysList = session.createQuery("FROM Day").setMaxResults(amount).list();
             for (Iterator iterator =
-                 daysList.iterator(); iterator.hasNext();){
+                 daysList.iterator(); iterator.hasNext(); ) {
                 days.add((Day) iterator.next());
             }
             tx.commit();
-        }catch (HibernateException e) {
-            if (tx!=null) tx.rollback();
+        } catch (HibernateException e) {
+            if (tx != null) tx.rollback();
             e.printStackTrace();
-        }finally {
-            session.close();
         }
         return days;
     }

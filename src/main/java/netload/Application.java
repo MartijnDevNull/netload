@@ -1,4 +1,6 @@
-package netload; /**
+package netload;
+
+/**
  * Copyright (C) 01/02/17 martijn
  * <p>
  * This program is free software: you can redistribute it and/or modify
@@ -15,14 +17,33 @@ package netload; /**
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import it.sauronsoftware.cron4j.Scheduler;
+import netload.controller.Update;
+import org.apache.log4j.Logger;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
+
+import java.io.IOException;
+import java.text.ParseException;
 
 @SpringBootApplication
 @ComponentScan
 public class Application {
     public static void main(String[] args) {
+        Logger log = Logger.getLogger(Application.class.getName());
+
+        Scheduler s = new Scheduler();
+        s.schedule("0 * * * *", () -> {
+            try {
+                new Update().update();
+            } catch (Exception e) {
+                log.error(e.getMessage());
+            }
+        });
+
+        s.start();
         SpringApplication.run(Application.class, args);
+        log.info("Scheduler and application started");
     }
 }
