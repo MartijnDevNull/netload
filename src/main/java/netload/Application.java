@@ -18,14 +18,11 @@ package netload;
  */
 
 import it.sauronsoftware.cron4j.Scheduler;
-import netload.controller.Update;
+import netload.controller.UpdateController;
 import org.apache.log4j.Logger;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
-
-import java.io.IOException;
-import java.text.ParseException;
 
 @SpringBootApplication
 @ComponentScan
@@ -36,7 +33,7 @@ public class Application {
         Scheduler s = new Scheduler();
         s.schedule("0 * * * *", () -> {
             try {
-                new Update().update();
+                new UpdateController().update();
             } catch (Exception e) {
                 log.error(e.getMessage());
             }

@@ -29,11 +29,11 @@ import java.util.Collections;
  */
 public class StatsController {
     private Stats stats;
-    private Scrape scrape;
+    private ScrapeController scrapeController;
 
     public StatsController() {
         stats = new Stats();
-        scrape = new Scrape();
+        scrapeController = new ScrapeController();
     }
 
     public ArrayList<Day> getAllDays() {

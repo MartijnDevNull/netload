@@ -22,19 +22,19 @@ import java.text.ParseException;
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-public class Update {
+public class UpdateController {
     private Stats stats;
-    private Scrape scrape;
+    private ScrapeController scrapeController;
     static Logger log;
 
-    public Update() {
+    public UpdateController() {
         stats = new Stats();
-        scrape = new Scrape();
-        log = Logger.getLogger(Update.class.getName());
+        scrapeController = new ScrapeController();
+        log = Logger.getLogger(UpdateController.class.getName());
     }
 
     public boolean update() throws IOException, ParseException {
-        scrape.getAllDays().forEach(day -> {
+        scrapeController.getAllDays().forEach(day -> {
             try {
                 stats.addDay(day);
             } catch (Exception e) {

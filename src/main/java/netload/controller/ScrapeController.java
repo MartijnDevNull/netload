@@ -32,11 +32,13 @@ import java.util.List;
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-public class Scrape {
-    public final String URL = "http://helpdesk.sshnet.nl/v12/q/netload.php?outlet=6090001-09-10&housenr=76&roomnr=22&submit=submit";
-    SimpleDateFormat formatter;
-    public Scrape() {
+public class ScrapeController {
+    private String URL;
+    private SimpleDateFormat formatter;
+
+    public ScrapeController() {
         formatter = new SimpleDateFormat("yyyy-MM-dd");
+        URL = SSHRoomController.getInstance().getScrapeURL();
     }
 
     public ArrayList<Day> getAllDays() throws IOException, ParseException {

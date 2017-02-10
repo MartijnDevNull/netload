@@ -32,7 +32,6 @@ public class Stats {
         try{
             factory = new Configuration().configure().buildSessionFactory();
         }catch (Throwable ex) {
-            System.err.println("Failed to create sessionFactory object." + ex);
             throw new ExceptionInInitializerError(ex);
         }
     }
@@ -69,7 +68,7 @@ public class Stats {
         try (Session session = factory.openSession()) {
             amount = (amount == 0) ? 12 : amount;
             tx = session.beginTransaction();
-            List daysList = session.createQuery("FROM Day").setMaxResults(amount).list();
+            List daysList = session.createQuery("FROM Day ORDER BY id DESC").setMaxResults(amount).list();
             for (Iterator iterator =
                  daysList.iterator(); iterator.hasNext(); ) {
                 days.add((Day) iterator.next());
