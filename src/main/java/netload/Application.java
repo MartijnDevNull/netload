@@ -28,6 +28,7 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan
 public class Application {
     public static void main(String[] args) {
+        SpringApplication.run(Application.class, args);
         Logger log = Logger.getLogger(Application.class.getName());
 
         Scheduler s = new Scheduler();
@@ -40,7 +41,6 @@ public class Application {
         });
 
         s.start();
-        SpringApplication.run(Application.class, args);
         log.info("Scheduler and application started");
     }
 }

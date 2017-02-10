@@ -155,7 +155,7 @@ function getBarData() {
     });
 }
 
-window.onload = function () {
+$(document).ready(function(){
     getChartData().then(function (data) {
         var chart1 = document.getElementById("line-chart").getContext("2d");
         window.myLine = new Chart(chart1).Line(data, {
@@ -183,4 +183,4 @@ window.onload = function () {
             responsive: true
         });
     });
-};
+});

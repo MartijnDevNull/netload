@@ -75,7 +75,7 @@ public class View {
             return scraper.getWeek();
         } catch (Exception e) {
             log.error(e.getMessage());
-            throw new ScraperException("Something went wrong scaping week");
+            throw new ScraperException("Something went wrong scraping week");
         }
     }
 
@@ -86,7 +86,7 @@ public class View {
             return updateController.update();
         } catch (Exception e) {
             log.error(e.getMessage());
-            throw new UpdateException("Can't update datbase");
+            throw new UpdateException("Can't update database");
         }
     }
 
