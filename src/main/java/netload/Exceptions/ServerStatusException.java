@@ -1,6 +1,10 @@
-package netload.view;
+package netload.Exceptions;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
 /**
- * Copyright (C) 01/02/17 martijn
+ * Copyright (C) 10/02/17 martijn.
  * <p>
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,13 +19,10 @@ package netload.view;
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-import org.apache.log4j.Logger;
 
-public class View {
-    static Logger log;
-
-    public View(String classname) {
-        log = Logger.getLogger(View.class.getName());
-        log.info("View: " + classname + " started");
+@ResponseStatus(value= HttpStatus.I_AM_A_TEAPOT, reason="Error with getting status")
+public class ServerStatusException extends Exception{
+    public ServerStatusException(String msg) {
+        super(msg);
     }
 }

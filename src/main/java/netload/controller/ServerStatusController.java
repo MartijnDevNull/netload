@@ -1,6 +1,7 @@
-package netload.view;
+package netload.controller;
+
 /**
- * Copyright (C) 01/02/17 martijn
+ * Copyright (C) 13/02/17 martijn.
  * <p>
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,13 +16,6 @@ package netload.view;
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-import org.apache.log4j.Logger;
+public class ServerStatusController {
 
-public class View {
-    static Logger log;
-
-    public View(String classname) {
-        log = Logger.getLogger(View.class.getName());
-        log.info("View: " + classname + " started");
-    }
 }

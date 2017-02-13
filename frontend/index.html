@@ -8,8 +8,10 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/datepicker3.css" rel="stylesheet">
     <link href="css/styles.css" rel="stylesheet">
+    <link href="css/bootstrap-table.css" rel="stylesheet">
 
-    <link rel='shortcut icon' type='image/x-icon' href='img/favicon.ico' />
+
+    <link rel='shortcut icon' type='image/x-icon' href='img/favicon.ico'/>
 
     <!--Icons-->
     <script src="js/lumino.glyphs.js"></script>
@@ -133,6 +135,32 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-default">
+                <div class="panel-heading">Server Status</div>
+                <div class="panel-body">
+                    <table data-toggle="table" data-url="tables/data2.json">
+                        <thead>
+                        <tr>
+                            <th data-field="id" data-align="center">Server</th>
+                            <th data-field="name" data-align="center">Response</th>
+                            <th data-field="price" data-align="center">Status</th>
+                        </tr>
+                        </thead>
+
+                        <tr class="empty">
+                            <td></td>
+                            <td><img src="img/loading.gif" alt="loading"
+                                     style="display: block; margin: 0 auto;width:35px;height:40px;"></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
                 <div class="panel-heading">Up/Down per week</div>
                 <div class="panel-body">
                     <div class="canvas-wrapper">
@@ -149,7 +177,9 @@
                 <div class="panel-heading">Upload vs Download</div>
                 <div class="panel-body">
                     <div class="canvas-wrapper">
-                        <div id="thisweekPi" class="large"><img src="img/loading.gif" alt="loading" style="display: block; margin: 0 auto;height: auto; width: auto; max-width: 200px; max-height: 200px;"></div>
+                        <div id="thisweekPi" class="large"><img src="img/loading.gif" alt="loading"
+                                                                style="display: block; margin: 0 auto;height: auto; width: auto; max-width: 200px; max-height: 200px;">
+                        </div>
                         <canvas class="chart" id="pie-chart"></canvas>
                     </div>
                 </div>
@@ -160,13 +190,15 @@
                 <div class="panel-heading">Usage this week</div>
                 <div class="panel-body">
                     <div class="canvas-wrapper">
-                        <div id="thisweekDoughnut" class="large"><img src="img/loading.gif" alt="loading" style="display: block; margin: 0 auto;height: auto; width: auto; max-width: 200px; max-height: 200px;"></div>
+                        <div id="thisweekDoughnut" class="large"><img src="img/loading.gif" alt="loading"
+                                                                      style="display: block; margin: 0 auto;height: auto; width: auto; max-width: 200px; max-height: 200px;">
+                        </div>
                         <canvas class="chart" id="doughnut-chart"></canvas>
                     </div>
                 </div>
             </div>
         </div>
-    </div><!--/.row-->
+    </div>  <!--/.row-->
 </div>    <!--/.main-->
 
 
@@ -177,6 +209,7 @@
 <script src="js/easypiechart.js"></script>
 <script src="js/easypiechart-data.js"></script>
 <script src="js/bootstrap-datepicker.js"></script>
+<script src="js/bootstrap-table.js"></script>
 <script>
     !function ($) {
         $(document).on("click", "ul.nav li.parent > a > span.icon", function () {
